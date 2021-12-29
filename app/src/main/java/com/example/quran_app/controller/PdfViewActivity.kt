@@ -137,7 +137,7 @@ getSupportActionBar()?.title = DataServices.getsurahFromPage(page).title
                     .enableSwipe(true)
                     .swipeHorizontal(true).pageFitPolicy(FitPolicy.HEIGHT)
                     .enableAnnotationRendering(true)
-                    .scrollHandle(DefaultScrollHandle(this))
+//                    .scrollHandle(DefaultScrollHandle(this))
                     .spacing(2).pageFitPolicy(FitPolicy.WIDTH).load()
                 scrollChanger.setText(getString(R.string.vertical))
             } else {
@@ -148,7 +148,7 @@ getSupportActionBar()?.title = DataServices.getsurahFromPage(page).title
 //                    .pages(pdfView.currentPage)
                     .swipeHorizontal(false).pageFitPolicy(FitPolicy.HEIGHT)
                     .enableAnnotationRendering(true)
-                    .scrollHandle(DefaultScrollHandle(this))
+//                    .scrollHandle(DefaultScrollHandle(this))
                     .spacing(2).pageFitPolicy(FitPolicy.WIDTH)
                     .load()
                 scrollChanger.setText(getString(R.string.horizontol))
@@ -268,7 +268,7 @@ getSupportActionBar()?.title = DataServices.getsurahFromPage(page).title
             .onPageScroll(onPageScrollListner)
             .swipeHorizontal(true).pageFitPolicy(FitPolicy.HEIGHT)
             .enableAnnotationRendering(true)
-            .scrollHandle(DefaultScrollHandle(this))
+//            .scrollHandle(DefaultScrollHandle(this))
             .spacing(2).pageFitPolicy(FitPolicy.WIDTH)
             .load()
         return i

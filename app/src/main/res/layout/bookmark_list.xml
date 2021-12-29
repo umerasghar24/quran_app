@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="top"
     android:layout_margin="5dp"
+    android:paddingBottom="10dp"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="8dp"
-    android:layout_gravity="top"
     app:cardElevation="10dp"
-    android:paddingBottom="10dp"
     app:cardMaxElevation="10dp"
     app:cardPreventCornerOverlap="true">
 
@@ -52,32 +52,26 @@
             android:id="@+id/no_verse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/bookmarks_name"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="12dp"
+            android:layout_below="@id/bookmark_title"
             android:drawablePadding="2dp"
             android:text="@string/page_number"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/page_bookmarks"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bookmarks_name" />
+            app:layout_constraintStart_toEndOf="@+id/bookmarks_name"
+            app:layout_constraintTop_toBottomOf="@+id/delete_icon" />
 
         <TextView
             android:id="@+id/page_bookmarks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bookmarks_name"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="200dp"
-            android:layout_marginBottom="12dp"
+
+            android:layout_marginStart="8dp"
+
+            android:layout_marginEnd="8dp"
             android:drawablePadding="2dp"
             android:text="@string/_10"
-
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/no_verse"
@@ -91,24 +85,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/image"
             app:layout_constraintBottom_toBottomOf="@+id/surrah_image"
             app:layout_constraintEnd_toStartOf="@+id/surrah_image"
             app:layout_constraintStart_toEndOf="@+id/bookmarks_name"
             app:layout_constraintTop_toTopOf="@+id/surrah_image"
-            app:srcCompat="@drawable/ic_bookmark"
-            android:contentDescription="@string/image" />
+            app:srcCompat="@drawable/ic_bookmark" />
 
         <TextView
             android:id="@+id/bookmark_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             android:text="ABCD"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/page_bookmarks"
-            app:layout_constraintTop_toBottomOf="@+id/surrah_image" />
+            app:layout_constraintEnd_toEndOf="@+id/bookmarks_name"
+            app:layout_constraintStart_toStartOf="@+id/bookmarks_name"
+            app:layout_constraintTop_toBottomOf="@+id/bookmarks_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
