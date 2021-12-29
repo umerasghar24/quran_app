@@ -6,8 +6,8 @@
     <string name="_10">10</string>
     <string name="select_supparah">Select Supparah</string>
     <string name="_144">144</string>
-    <string name="previous_surah">Previous Surah</string>
-    <string name="next_surah">Next Surah</string>
+    <string name="previous_surah">Previous</string>
+    <string name="next_surah">Next</string>
     <string name="verticle_navigation">Verticle Navigation</string>
     <string name="search_ayah">Search Ayah</string>
     <string name="surah_fatiha">Surah Fatiha</string>
@@ -15,5 +15,5 @@
     <string name="image">Image</string>
     <string name="verse">Verse</string>
     <string name="page_number">Page Number</string>
-    <string name="shared_prefrence">SHARED_PREFRENCE</string>
+    <string name="title">ABCD</string>
 </resources>

@@ -18,7 +18,7 @@
         android:id="@+id/app_bar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#197278"
+        android:background="@color/green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -39,6 +39,7 @@
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdf_viewer"
         android:layout_width="match_parent"
+        android:background="@color/grey_6"
         android:layout_height="0dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
@@ -73,13 +74,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_previus" />
+                app:srcCompat="@drawable/ic_previus"
+                android:contentDescription="@string/previous_surah" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="Previous"
+                android:text="@string/previous_surah"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -102,11 +104,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_next" />
+                app:srcCompat="@drawable/ic_next"
+                android:contentDescription="@string/next_surah" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Next"
+                android:text="@string/next_surah"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="12sp"
@@ -129,12 +132,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_verticle_split" />
+                app:srcCompat="@drawable/ic_verticle_split"
+                android:contentDescription="@string/vertical" />
             <TextView
                 android:id="@+id/horiz_vertical_scroll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vertical"
+                android:text="@string/vertical"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="12sp"
@@ -157,11 +161,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_search" />
+                app:srcCompat="@drawable/ic_search"
+                android:contentDescription="@string/search_ayah" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GO-TO"
+                android:text="@string/search_ayah"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="12sp"

@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             when (position) {
                 0 -> {
-                    tab.text = "By Suparah"
+                    tab.text = "By Juzz"
                 }
                 1 -> {
                     tab.text = "By Surah"

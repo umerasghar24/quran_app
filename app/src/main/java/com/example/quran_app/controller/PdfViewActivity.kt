@@ -49,7 +49,8 @@ class PdfViewActivity : BaseActivity() {
     var surah by Delegates.notNull<Int>()
     var parah by Delegates.notNull<Int>()
 lateinit var editText: EditText
-
+    private var nightMode:Boolean=false
+    private var swipeVertical:Boolean=true
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -129,27 +130,30 @@ getSupportActionBar()?.title = DataServices.getsurahFromPage(page).title
 
 //            val pagehold=DataServices.parahs[parah].page
             if (pdfView.isSwipeVertical == true) {
-
+swipeVertical=true
                 pdfView.fromAsset("Quranpak.pdf")
                     .defaultPage(pdfView.currentPage)
 //                    .pages(pdfView.currentPage)
                     .onPageScroll(onPageScrollListner)
-                    .enableSwipe(true)
+                    .enableSwipe(swipeVertical)
+                    .nightMode(nightMode)
                     .swipeHorizontal(true).pageFitPolicy(FitPolicy.HEIGHT)
                     .enableAnnotationRendering(true)
 //                    .scrollHandle(DefaultScrollHandle(this))
-                    .spacing(2).pageFitPolicy(FitPolicy.WIDTH).load()
+                    .spacing(10).pageFitPolicy(FitPolicy.WIDTH).load()
                 scrollChanger.setText(getString(R.string.vertical))
             } else {
+                swipeVertical=false
                 pdfView.fromAsset("Quranpak.pdf")
                     .enableSwipe(true)
                     .defaultPage(pdfView.currentPage)
                     .onPageScroll(onPageScrollListner)
+                    .nightMode(nightMode)
 //                    .pages(pdfView.currentPage)
-                    .swipeHorizontal(false).pageFitPolicy(FitPolicy.HEIGHT)
+                    .swipeHorizontal(swipeVertical).pageFitPolicy(FitPolicy.HEIGHT)
                     .enableAnnotationRendering(true)
 //                    .scrollHandle(DefaultScrollHandle(this))
-                    .spacing(2).pageFitPolicy(FitPolicy.WIDTH)
+                    .spacing(10).pageFitPolicy(FitPolicy.WIDTH)
                     .load()
                 scrollChanger.setText(getString(R.string.horizontol))
 
@@ -162,7 +166,7 @@ getSupportActionBar()?.title = DataServices.getsurahFromPage(page).title
         Log.e(TAG, "onCreate: Title " + para.title)
         if(bookmarkpage>=0)
         {
-          LoadPage(bookmarkpage);
+          LoadPage(bookmarkpage)
         }
        else if (surah>=0) {
             LoadSurah(surah)
@@ -265,11 +269,15 @@ getSupportActionBar()?.title = DataServices.getsurahFromPage(page).title
         pdfView.fromAsset("Quranpak.pdf")
             .enableSwipe(true)
             .defaultPage(i)
+            .nightMode(nightMode)
             .onPageScroll(onPageScrollListner)
-            .swipeHorizontal(true).pageFitPolicy(FitPolicy.HEIGHT)
+            .swipeHorizontal(swipeVertical)
+            .pageFitPolicy(FitPolicy.HEIGHT)
+            .spacing(10)
             .enableAnnotationRendering(true)
 //            .scrollHandle(DefaultScrollHandle(this))
-            .spacing(2).pageFitPolicy(FitPolicy.WIDTH)
+//            .scrollHandle(DefaultScrollHandle(this,true))
+            .pageFitPolicy(FitPolicy.WIDTH)
             .load()
         return i
     }
@@ -303,6 +311,40 @@ getSupportActionBar()?.title = DataServices.getsurahFromPage(page).title
 
 
         }
+         if (item.itemId==R.id.color_mode){
+             if(nightMode){
+                    nightMode=false
+                 LoadDocument(pdfView.currentPage)
+             }else{
+                 nightMode=true
+                 LoadDocument(pdfView.currentPage)
+             }
+
+     /*        if  (pdfView) {
+                 pdfView.fromAsset("Quranpak.pdf")
+                     .defaultPage(pdfView.currentPage)
+//                    .pages(pdfView.currentPage)
+                     .nightMode(true)
+                     .onPageScroll(onPageScrollListner)
+                     .enableSwipe(true)
+                     .swipeHorizontal(true).pageFitPolicy(FitPolicy.HEIGHT)
+                     .enableAnnotationRendering(true)
+//                    .scrollHandle(DefaultScrollHandle(this))
+                     .spacing(2).pageFitPolicy(FitPolicy.WIDTH).load()
+                 }else{
+                 pdfView.fromAsset("Quranpak.pdf")
+                     .defaultPage(pdfView.currentPage)
+//                    .pages(pdfView.currentPage)
+                     .nightMode(false)
+                     .onPageScroll(onPageScrollListner)
+                     .enableSwipe(true)
+                     .swipeHorizontal(true).pageFitPolicy(FitPolicy.HEIGHT)
+                     .enableAnnotationRendering(true)
+//                    .scrollHandle(DefaultScrollHandle(this))
+                     .spacing(2).pageFitPolicy(FitPolicy.WIDTH).load()
+                 }*/
+
+         }
         return super.onOptionsItemSelected(item)
     }
 

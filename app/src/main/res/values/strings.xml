@@ -11,10 +11,10 @@
     <string name="parah">Qala Fama Khatbukum قال فما خطبكم</string>
     <string name="select_supparah">Select Supparah</string>
     <string name="_144">144</string>
-    <string name="previous_surah">Previous Surah</string>
-    <string name="next_surah">Next Surah</string>
+    <string name="previous_surah">Previous</string>
+    <string name="next_surah">Next</string>
     <string name="verticle_navigation">Verticle Navigation</string>
-    <string name="search_ayah">Search Ayah</string>
+    <string name="search_ayah">GO-TO</string>
     <string name="surah_fatiha">Surah Fatiha</string>
     <string name="_1">1</string>
 <string name="parah_key">PARAH_KEY</string>
@@ -27,11 +27,10 @@
     <string name="image">Image</string>
     <string name="verse">Verse</string>
     <string name="page_number">Page Number</string>
-    <string name="recent_page">recentPage</string>
+    <string name="recent_page">Recent Page</string>
     <string name="vertical">Vertical</string>
     <string name="horizontol">Horizontol</string>
-
-
+    <string name="title">ABCD</string>
 
 
 </resources>

@@ -11,8 +11,6 @@
     android:paddingBottom="10dp"
     app:cardMaxElevation="10dp"
     app:cardPreventCornerOverlap="true"
-
-
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
