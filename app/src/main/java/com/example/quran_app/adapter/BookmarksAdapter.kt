@@ -60,8 +60,15 @@ init {
         private val parahPict: ImageView = itemView.findViewById(R.id.surrah_image)
         fun bindParahs(currentItem: BookmarksParah, context: Context) {
             itemView.page_bookmarks.text = currentItem.page.toString()
-            itemView.bookmark_title.text=currentItem.image
-            itemView.bookmarks_name.text=DataServices.getparahFromPage(currentItem.page).title
+            if (currentItem.image.isBlank()){
+//                itemView.bookmarks_name.text=DataServices.getparahFromPage(currentItem.page).title
+                itemView.bookmarks_name.text=DataServices.getsurahFromPage(currentItem.page).title
+            }else{
+//                itemView.bookmark_title.text=currentItem.image
+                itemView.bookmarks_name.text=currentItem.image
+            }
+
+
         val resourceId = context.resources.getIdentifier(
 //            "ic_1"
             DataServices.getparahFromPage(currentItem.page).image, "drawable", context.packageName

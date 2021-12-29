@@ -97,6 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="@string/title"
+            android:visibility="invisible"
             android:minLines="2"
             android:textColor="@color/black"
             android:textStyle="bold"
