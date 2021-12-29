@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp"
+    android:layout_gravity="top"
+    app:cardElevation="10dp"
+    android:paddingBottom="10dp"
+    app:cardMaxElevation="10dp"
+    app:cardPreventCornerOverlap="true"
+
+
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/surah_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+
+            android:layout_marginEnd="10dp"
+            android:background="#197278"
+            android:contentDescription="@string/image"
+            android:padding="5dp"
+            android:src="@drawable/ic_1"
+            app:layout_constraintBottom_toTopOf="@+id/verse_number_surah"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/surah_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/parah"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:minLines="2"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/verse_number_surah"
+            app:layout_constraintEnd_toStartOf="@+id/surah_image"
+            app:layout_constraintStart_toEndOf="@+id/surah_num"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/no_verse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/surah_name"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="12dp"
+            android:drawablePadding="2dp"
+            android:text="@string/verse"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/verse_number_surah"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/surah_name" />
+
+        <TextView
+            android:id="@+id/verse_number_surah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/surah_name"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="200dp"
+            android:layout_marginBottom="12dp"
+            android:drawablePadding="2dp"
+            android:text="@string/_10"
+
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@+id/no_verse"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/no_verse"
+            app:layout_constraintTop_toTopOf="@+id/no_verse" />
+
+        <TextView
+            android:id="@+id/surah_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/_10"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/surah_name"
+            app:layout_constraintEnd_toStartOf="@+id/surah_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/surah_name" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

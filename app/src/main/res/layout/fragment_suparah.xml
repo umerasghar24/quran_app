@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_container_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.SuparahFragment"
+    android:tag="my_tag">
+
+<!--    <TextView-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:id="@+id/parahtxtView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/parahsListView"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/select_supparah" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/parahsListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        />
+
+
+
+
+</RelativeLayout>
