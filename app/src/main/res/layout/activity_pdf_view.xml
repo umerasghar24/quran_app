@@ -18,7 +18,7 @@
         android:id="@+id/app_bar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/green"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,10 +29,11 @@
             android:layout_height="match_parent"
             app:menu="@menu/menu_viewer"
             app:title=""
+            app:navigationIconTint="@color/black"
+            app:navigationIcon="@drawable/ic_arrow_back"
             android:textAlignment="center"
             android:textDirection="firstStrong"
-            app:titleTextAppearance="@style/Base.CardView"
-            app:subtitleTextColor="@color/white"/>
+            app:titleTextColor="@color/white"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -41,7 +42,7 @@
         android:layout_width="match_parent"
         android:background="@color/grey_6"
         android:layout_height="0dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -161,8 +162,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_search"
-                android:contentDescription="@string/search_ayah" />
+                android:backgroundTint="@color/white"
+                android:foregroundTint="@color/white"
+                app:srcCompat="@drawable/ic_find_in_page"
+                android:contentDescription="@string/search_ayah"
+                app:tint="@color/black" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

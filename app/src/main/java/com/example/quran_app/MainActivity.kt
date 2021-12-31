@@ -9,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
+import android.widget.Toolbar
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
@@ -20,11 +21,14 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.quran_app.adapter.ParahRecyclerAdapter
 import com.example.quran_app.adapter.ViewPagerAdapter
 import com.example.quran_app.controller.PdfViewActivity
+import com.example.quran_app.controller.PdfViewFullSizeActivity
 import com.example.quran_app.controller.SuparahFragment
+import com.example.quran_app.controller.UserActivity
 import com.example.quran_app.models.ParahNames
 import com.example.quran_app.services.DataServices
 import com.example.quran_app.viewModel.SearchViewModel
 import com.github.barteksc.pdfviewer.PDFView
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -37,6 +41,7 @@ import org.w3c.dom.Text
 //lateinit var countryrv: RecyclerView
 //lateinit var suparahFragment:SuparahFragment
 class MainActivity : AppCompatActivity() {
+
     lateinit var tinyDB:TinyDB
     val mViewModel: SearchViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,11 +50,19 @@ class MainActivity : AppCompatActivity() {
 //         suparahFragment= SuparahFragment()
         tinyDB= TinyDB(this)
 
-        val fab:FloatingActionButton=findViewById(R.id.fab)
+        val fab:ExtendedFloatingActionButton=findViewById(R.id.fab)
 //        var fragmentTransaction:FragmentTransaction=supportFragmentManager.beginTransaction()
         val tabLayout = findViewById<TabLayout>(R.id.tab_layout)
         val viewPager2 = findViewById<ViewPager2>(R.id.view_pager2)
-        setSupportActionBar(tool)
+        val toolbar:androidx.appcompat.widget.Toolbar=findViewById(R.id.tool)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+toolbar.setNavigationOnClickListener {
+    val userIntent=Intent(this,UserActivity::class.java)
+    startActivity(userIntent)
+}
+
+
 
         val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
 //        setupActionBarWithNavController(findNavController(R.id.tool))
@@ -70,11 +83,7 @@ class MainActivity : AppCompatActivity() {
             }
         }.attach()
         fab.setOnClickListener {
-//            val view:View=layoutInflater.inflate(R.layout.activity_pdf_view,pdfActivity,false)
-//            val pdfView:PDFView=view.findViewById(R.id.pdf_viewer)
-//            pdfView.currentPage+1
-//
-//TinyDB.getInstance(this).putInt(getString(R.string.shared_prefrence),)
+fab.extend()
             val intent=Intent(this,PdfViewActivity::class.java)
             startActivity(intent)//setting value of fab in pdf Activity
         }

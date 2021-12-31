@@ -24,13 +24,13 @@
             android:layout_alignParentEnd="true"
 
             android:layout_marginEnd="10dp"
-            android:background="#197278"
             android:contentDescription="@string/image"
             android:padding="5dp"
             android:src="@drawable/ic_1"
             app:layout_constraintBottom_toTopOf="@+id/page_bookmarks"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/maroon" />
 
         <TextView
             android:id="@+id/bookmarks_name"
@@ -55,7 +55,6 @@
             android:drawablePadding="2dp"
             android:text="@string/page_number"
             android:textColor="@color/black"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/page_bookmarks"
             app:layout_constraintStart_toEndOf="@+id/bookmarks_name"

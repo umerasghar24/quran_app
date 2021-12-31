@@ -17,7 +17,7 @@
     <string name="search_ayah">GO-TO</string>
     <string name="surah_fatiha">Surah Fatiha</string>
     <string name="_1">1</string>
-<string name="parah_key">PARAH_KEY</string>
+    <string name="parah_key">PARAH_KEY</string>
     <string name="bookmark_key">BOOKMARK_KEY</string>
     <string name="surah_key">SURAH_KEY</string>
     <string name="parah_1">1</string>
@@ -31,6 +31,9 @@
     <string name="vertical">Vertical</string>
     <string name="horizontol">Horizontol</string>
     <string name="title">ABCD</string>
+    <string name="title_activity_pdf_view_full_size">PdfViewFullSizeActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 
 </resources>

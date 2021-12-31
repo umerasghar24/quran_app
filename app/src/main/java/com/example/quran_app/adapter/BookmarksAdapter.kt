@@ -9,12 +9,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Filter
+import android.widget.Filterable
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quran_app.R
 import com.example.quran_app.controller.BookMarkFragment
 import com.example.quran_app.controller.PdfViewActivity
+import com.example.quran_app.controller.PdfViewFullSizeActivity
 import com.example.quran_app.models.BookmarksParah
 import com.example.quran_app.services.DataServices
 import com.example.quran_app.viewModel.ParahViewModel
@@ -60,12 +64,13 @@ init {
         private val parahPict: ImageView = itemView.findViewById(R.id.surrah_image)
         fun bindParahs(currentItem: BookmarksParah, context: Context) {
             itemView.page_bookmarks.text = currentItem.page.toString()
-            if (currentItem.image.isBlank()){
+            if (currentItem.title.isBlank()){
 //                itemView.bookmarks_name.text=DataServices.getparahFromPage(currentItem.page).title
-                itemView.bookmarks_name.text=DataServices.getsurahFromPage(currentItem.page).title
+//                itemView.bookmarks_name.text=DataServices.getsurahFromPage(currentItem.page).title
+                itemView.bookmarks_name.text=DataServices.getparahFromPage(currentItem.page).title
             }else{
 //                itemView.bookmark_title.text=currentItem.image
-                itemView.bookmarks_name.text=currentItem.image
+                itemView.bookmarks_name.text=currentItem.title
             }
 
 

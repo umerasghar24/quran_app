@@ -11,5 +11,5 @@ data class BookmarksParah(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val page: Int,
-    val image: String
+    val title: String
 )

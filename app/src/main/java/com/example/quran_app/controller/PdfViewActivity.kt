@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.example.quran_app.R
 import com.example.quran_app.models.BookmarksParah
@@ -36,6 +37,7 @@ import free.translate.languagetranslator.cameratranslation.voicetranslator.TinyD
 
 
 class PdfViewActivity : BaseActivity() {
+    lateinit private var  mtoolBar:Toolbar
     lateinit var scrollChanger:TextView
     lateinit var onPageScrollListner: OnPageScrollListener
     private var currentSurah by Delegates.notNull<Int>()
@@ -60,8 +62,10 @@ scrollChanger=findViewById(R.id.horiz_vertical_scroll)
 fabPage=TinyDB.getInstance(this).getInt(getString(R.string.recent_page),0)
         currentSurah=DataServices.getsurahFromPage(fabPage).surahNumber //for getting surah from page number
 //        toolbar1.title=DataServices.getparahFromPage(fabPage).title
-
-        setSupportActionBar(toolbar1)
+        mtoolBar=findViewById(R.id.toolbar1)
+        setSupportActionBar(mtoolBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        mtoolBar.setNavigationOnClickListener { view->onBackPressed() }
         surah = intent.getIntExtra(getString(R.string.surah_key), -1)
         Log.e("PdfViewActivity", "you selected$surah")
          parah = intent.getIntExtra(getString(R.string.parah_key), -1)
@@ -76,6 +80,21 @@ fabPage=TinyDB.getInstance(this).getInt(getString(R.string.recent_page),0)
 getSupportActionBar()?.title = DataServices.getsurahFromPage(page).title
         })
 
+
+        pdfView.fromAsset("Quranpak.pdf")
+            .enableSwipe(true)
+//            .defaultPage()
+            .nightMode(nightMode)
+            .onPageScroll(onPageScrollListner)
+            .defaultPage(1)
+            .swipeHorizontal(swipeVertical)
+            .pageFitPolicy(FitPolicy.HEIGHT)
+            .spacing(10)
+            .enableAnnotationRendering(true)
+//            .scrollHandle(DefaultScrollHandle(this))
+//            .scrollHandle(DefaultScrollHandle(this,true))
+            .pageFitPolicy(FitPolicy.WIDTH)
+            .load()
         nex.setOnClickListener {
 //var su=DataServices.surah[surah ++].page
 ////            surah=surah ++
@@ -131,34 +150,36 @@ getSupportActionBar()?.title = DataServices.getsurahFromPage(page).title
 //            val pagehold=DataServices.parahs[parah].page
             if (pdfView.isSwipeVertical == true) {
 swipeVertical=true
-                pdfView.fromAsset("Quranpak.pdf")
-                    .defaultPage(pdfView.currentPage)
-//                    .pages(pdfView.currentPage)
-                    .onPageScroll(onPageScrollListner)
-                    .enableSwipe(swipeVertical)
-                    .nightMode(nightMode)
-                    .swipeHorizontal(true).pageFitPolicy(FitPolicy.HEIGHT)
-                    .enableAnnotationRendering(true)
-//                    .scrollHandle(DefaultScrollHandle(this))
-                    .spacing(10).pageFitPolicy(FitPolicy.WIDTH).load()
+//                pdfView.fromAsset("Quranpak.pdf")
+//                    .defaultPage(pdfView.currentPage)
+////                    .pages(pdfView.currentPage)
+//                    .onPageScroll(onPageScrollListner)
+//                    .enableSwipe(swipeVertical)
+//                    .nightMode(nightMode)
+//                    .swipeHorizontal(true).pageFitPolicy(FitPolicy.HEIGHT)
+//                    .enableAnnotationRendering(true)
+////                    .scrollHandle(DefaultScrollHandle(this))
+//                    .spacing(10).pageFitPolicy(FitPolicy.WIDTH).load()
+                pdfView.isSwipeEnabled=swipeVertical
                 scrollChanger.setText(getString(R.string.vertical))
             } else {
                 swipeVertical=false
-                pdfView.fromAsset("Quranpak.pdf")
-                    .enableSwipe(true)
-                    .defaultPage(pdfView.currentPage)
-                    .onPageScroll(onPageScrollListner)
-                    .nightMode(nightMode)
-//                    .pages(pdfView.currentPage)
-                    .swipeHorizontal(swipeVertical).pageFitPolicy(FitPolicy.HEIGHT)
-                    .enableAnnotationRendering(true)
-//                    .scrollHandle(DefaultScrollHandle(this))
-                    .spacing(10).pageFitPolicy(FitPolicy.WIDTH)
-                    .load()
+//                pdfView.fromAsset("Quranpak.pdf")
+//                    .enableSwipe(true)
+//                    .defaultPage(pdfView.currentPage)
+//                    .onPageScroll(onPageScrollListner)
+//                    .nightMode(nightMode)
+////                    .pages(pdfView.currentPage)
+//                    .swipeHorizontal(swipeVertical).pageFitPolicy(FitPolicy.HEIGHT)
+//                    .enableAnnotationRendering(true)
+////                    .scrollHandle(DefaultScrollHandle(this))
+//                    .spacing(10).pageFitPolicy(FitPolicy.WIDTH)
+//                    .load()
+                pdfView.isSwipeEnabled=swipeVertical
                 scrollChanger.setText(getString(R.string.horizontol))
 
             }
-
+pdfView.loadPages()
         }
 
 
@@ -174,7 +195,7 @@ swipeVertical=true
             LoadParah(parah)
         }else{
             LoadDocument(fabPage)
-            show()
+//            show()
         }
         mUserViewModel = ViewModelProvider(this).get(ParahViewModel::class.java)
         val goTo:ImageView=findViewById(R.id.search)
@@ -186,14 +207,13 @@ swipeVertical=true
 
     private fun gotoPage(goto: Int) {
         val editText = EditText(this)
-        editText.setHint("Page Number")
+        editText.setHint("Enter Page Number")
         editText.keyListener=DigitsKeyListener.getInstance("0123456789")
         val dialougeBuilder= AlertDialog.Builder(this)
-        dialougeBuilder.setMessage("Enter The Page Number")
+        dialougeBuilder.setMessage("Go To Page")
         dialougeBuilder.setView(editText)
         dialougeBuilder.setPositiveButton("Done") { _, _ ->
             //by getting text value and jump to that page
-
             if (!editText.getText().toString().equals("")) {
                 val getValue: Int = editText.getText().toString().toInt()
                 if (getValue < 550) {
@@ -248,7 +268,7 @@ swipeVertical=true
 
     private fun LoadPage(page:Int) {
         LoadDocument(page-1)
-        show()
+//        show()
     }
 
     private fun LoadParah(i: Int) {
@@ -256,17 +276,19 @@ swipeVertical=true
             return
 
         LoadDocument(DataServices.parahs[i].page)
-        show()
+//        show()
     }
     private fun LoadSurah(i: Int) {
         if (i<0||i>114)
             return
         LoadDocument(DataServices.surah[i].page)
-        show()
+//        show()
     }
 
     private fun LoadDocument(i: Int): Int {
-        pdfView.fromAsset("Quranpak.pdf")
+  pdfView.jumpTo(i)
+        pdfView.loadPages()
+        /*      pdfView.fromAsset("Quranpak.pdf")
             .enableSwipe(true)
             .defaultPage(i)
             .nightMode(nightMode)
@@ -278,15 +300,15 @@ swipeVertical=true
 //            .scrollHandle(DefaultScrollHandle(this))
 //            .scrollHandle(DefaultScrollHandle(this,true))
             .pageFitPolicy(FitPolicy.WIDTH)
-            .load()
+            .load()*/
         return i
     }
 
-    private fun show() {
+   /* private fun show() {
         pdfView.visibility = View.VISIBLE
         nex.visibility = View.VISIBLE
         previ.visibility = View.VISIBLE
-    }
+    }*/
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_viewer,menu)
@@ -297,7 +319,8 @@ swipeVertical=true
         Log.e("onOptionsItemSelected", "ïtem = ${item.itemId}")
         if (item.itemId == R.id.bookmarks) {
              editText= EditText(this)
-            editText.setHint("Enter title")
+//            editText.setHint("Enter title")
+            editText.setText(DataServices.getsurahFromPage(pdfView.currentPage).title)
             val dialogBuilder=AlertDialog.Builder(this)
             dialogBuilder.setView(editText)
             dialogBuilder.setMessage("Enter Title")
@@ -305,20 +328,34 @@ swipeVertical=true
                 insertDataToDatabase()
 
             }
-            dialogBuilder.setNegativeButton("No"){_,_->}
+            dialogBuilder.setNegativeButton("Cancel"){_,_->}
             dialogBuilder.show()
 
 
 
         }
          if (item.itemId==R.id.color_mode){
-             if(nightMode){
-                    nightMode=false
-                 LoadDocument(pdfView.currentPage)
-             }else{
+             if(!nightMode){
                  nightMode=true
-                 LoadDocument(pdfView.currentPage)
+//                LoadDocument(pdfView.currentPage)
+
+                 pdfView.setNightMode(nightMode)
+                 item.setIcon(R.drawable.ic_light)
+
+
+
+//                LoadDocument(pdfView.currentPage)
+
+
+             }else{
+                 nightMode=false
+
+
+                 pdfView.setNightMode(nightMode)
+                 item.setIcon(R.drawable.ic_dark_mode)
+//                  LoadDocument(pdfView.currentPage)
              }
+             pdfView.loadPages()
 
      /*        if  (pdfView) {
                  pdfView.fromAsset("Quranpak.pdf")
@@ -353,7 +390,7 @@ val getText=editText.text.toString()
         val bookmark=BookmarksParah(
             id = 0,
             page = pdfView.currentPage+1,
-            image = getText
+            title = getText
 
         )
         mUserViewModel.addParah(bookmark)

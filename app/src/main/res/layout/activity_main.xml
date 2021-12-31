@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,16 +11,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/app_bar"
-        android:background="#197278">
+        android:background="@color/green">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="match_parent"
             android:id="@+id/tool"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:menu="@menu/menu_home"
+            app:navigationIconTint="@color/white"
+            app:navigationIcon="@drawable/ic_drawer_menu"
             app:title="@string/quran_pak"
             app:titleMarginStart="10dp"
-            app:titleTextColor="@color/white" />
+            app:titleTextColor="@color/white">
+
+
+            <!--  <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_account_circle_24"
+                />
+           -->
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
@@ -32,13 +44,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@drawable/ic_reading"
-        android:contentDescription="@string/recent_page" />
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="70dp"
+        android:contentDescription="@string/recent_page"
+        android:longClickable="true"
+        android:nestedScrollingEnabled="false"
+        android:text="Resume"
+        android:tint="@color/maroon"
+        app:backgroundTint="@color/maroon"
+        app:fabSize="auto"
+
+        app:srcCompat="@drawable/ic_reading" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
