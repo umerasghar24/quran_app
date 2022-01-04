@@ -5,32 +5,45 @@
       <map>
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable-v24/ic_previus.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable-v24/ic_rate_us_arrow.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/buttonback.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_1.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_add.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_ads_user.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_arrow.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_arrow_back.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_back_bt.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_bookmark.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_dark_mode.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_drawer_menu.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_find_in_page.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_goto_icon_.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_light.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_navigate_next.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_rate_emoji_0.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_reading.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_search.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_verticle.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/ic_verticle_split.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/drawable/round_corner_bg.xml" value="0.20364583333333333" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/activity_pdf_view.xml" value="0.22" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/activity_pdf_view_full_size.xml" value="0.25" />
-        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/activity_user.xml" value="0.33" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/activity_user.xml" value="0.22" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/bookmark_list.xml" value="0.45265151515151514" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/bookmarks_list.xml" value="0.1921875" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/fragment_book_mark.xml" value="0.10914855072463768" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/fragment_suparah.xml" value="0.2303370786516854" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/fragment_surah.xml" value="0.1" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/goto_page_dialoge.xml" value="0.1921875" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/ic_rate_us_arrow.xml" value="0.1875" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/item_track.xml" value="0.1921875" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/parah_list_item.xml" value="0.33" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/rating_dialog_layout.xml" value="0.1875" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/surah_list_item.xml" value="0.5" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/layout/test.xml" value="0.18" />
+        <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/menu-v26/menu_home.xml" value="0.1921875" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/menu-v26/menu_viewer.xml" value="0.1875" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/menu/menu_home.xml" value="0.1921875" />
         <entry key="..\:/Users/Umar Asghar/Desktop/AndroidProjects/Quran_app/app/src/main/res/menu/menu_viewer.xml" value="0.22" />

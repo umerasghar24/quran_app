@@ -8,12 +8,14 @@ import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import androidx.annotation.Nullable
+import androidx.constraintlayout.widget.StateSet
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.quran_app.MainActivity
 import com.example.quran_app.R
 import com.example.quran_app.adapter.ParahRecyclerAdapter
 import com.example.quran_app.models.ParahNames
@@ -70,6 +72,18 @@ class SuparahFragment : Fragment(R.layout.fragment_suparah) {
         val layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
         recyclerView.hasFixedSize()
+        recyclerView.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                Log.e(StateSet.TAG, "onScrolled: " )
+                if (dy>0){
+                    (activity as MainActivity).collapse()
+                }else{
+                    (activity as MainActivity).expand()
+                }
+            }
+        })
+
         return view
 
 

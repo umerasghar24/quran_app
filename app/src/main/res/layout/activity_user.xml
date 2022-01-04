@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey_6"
+
     tools:context=".controller.UserActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_user"
@@ -31,11 +32,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="390dp"
+        android:layout_height="260dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
-        android:background="@color/white"
+        android:background="@drawable/round_corner_bg"
         android:padding="5dp"
         android:paddingStart="5dp"
         android:paddingLeft="5dp"
@@ -67,6 +68,7 @@
                 app:tint="@color/maroon" />
 
             <TextView
+                android:id="@+id/shareapp_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -82,6 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:visibility="gone"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:text="FeedBack"
+                android:text="Feedback"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -171,6 +174,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/language"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -2,9 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-
-
         android:title=""
+        android:visible="false"
         android:iconTint="@color/black"
         android:icon="@drawable/ic_verticle"
         app:showAsAction="always"/>

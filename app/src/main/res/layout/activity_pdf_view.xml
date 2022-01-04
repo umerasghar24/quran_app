@@ -28,12 +28,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:menu="@menu/menu_viewer"
-            app:title=""
             app:navigationIconTint="@color/black"
             app:navigationIcon="@drawable/ic_arrow_back"
             android:textAlignment="center"
             android:textDirection="firstStrong"
-            app:titleTextColor="@color/white"/>
+            app:titleTextColor="@color/black">
+
+            <TextView
+                android:id="@+id/custom_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="Surah Name"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -47,7 +59,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_bar2" />
+        app:layout_constraintTop_toBottomOf="@id/app_bar2" >
+    </com.github.barteksc.pdfviewer.PDFView>
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
@@ -134,7 +147,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_verticle_split"
-                android:contentDescription="@string/vertical" />
+                android:contentDescription="@string/vertical"
+                app:tint="@color/black" />
             <TextView
                 android:id="@+id/horiz_vertical_scroll"
                 android:layout_width="wrap_content"

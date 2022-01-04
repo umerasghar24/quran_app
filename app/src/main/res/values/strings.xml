@@ -27,13 +27,32 @@
     <string name="image">Image</string>
     <string name="verse">Verse</string>
     <string name="page_number">Page Number</string>
-    <string name="recent_page">Recent Page</string>
+    <string name="recent_page">Resume</string>
     <string name="vertical">Vertical</string>
     <string name="horizontol">Horizontol</string>
     <string name="title">ABCD</string>
     <string name="title_activity_pdf_view_full_size">PdfViewFullSizeActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+<string name="app_title">Quran App</string>
+    <string name="app_install_link">https://theappglobe.blogspot.com/p/privacy-policy.html</string>
+    <string name="RATE_US_ON_GOOGLE_PLAY">RATE US ON GOOGLE PLAY</string>
+    <string name="RATE_US_REQUEST">We would greatly appreciate if you can rate us.</string>
+    <string name="RATE_US_MSG_0">We are looking hard for a better user experience.</string>
+    <string name="WE_LIKE_YOU_TOO">We like you too!</string>
+    <string name="THANKS_FOR_YOUR_FEEDBACK">Thanks for your feedback</string>
+    <string name="RATE">RATE</string>
+    <string name="the_best_we_can_get">The best we can get :)</string>
+    <string name="PLEASE_LEAVE_US_FEEDBACK">Please leave us some feedback</string>
+    <string name="OH_NO">Oh, no!</string>
+    <string name="share_via">Share Via</string>
+    <string name="feedback_email">teams@itglobe.pk</string>
+    <string name="email_subject">Tell us more!!</string>
+    <string name="email_text_settings">
+Let me recommend you this application
+
+</string>
+    <string name="app_share_text">Share This App</string>
 
 
 </resources>

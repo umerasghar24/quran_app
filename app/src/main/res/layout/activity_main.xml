@@ -44,22 +44,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.tuann.floatingactionbuttonexpandable.FloatingActionButtonExpandable
         android:id="@+id/fab"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fab_content="@string/recent_page"
         android:layout_marginBottom="70dp"
-        android:contentDescription="@string/recent_page"
-        android:longClickable="true"
-        android:nestedScrollingEnabled="false"
-        android:text="Resume"
-        android:tint="@color/maroon"
-        app:backgroundTint="@color/maroon"
-        app:fabSize="auto"
+        android:layout_marginEnd="20dp"
+        android:layout_gravity="bottom|end"
+        app:fab_text_color="@android:color/white"
+        app:fab_bg_color="@color/maroon"
+        app:fab_icon="@drawable/ic_reading"
+        android:backgroundTint="@color/white"
+        app:fab_duration="200"
 
-        app:srcCompat="@drawable/ic_reading" />
+        app:fab_typeface="fonts/RobotoSlab-Regular.ttf"
+
+        app:fab_expanded="true"/>
+     <!--   app:fab_padding="@dimen/padding_fab"
+        app:fab_padding_text_icon="@dimen/padding_text_icon"
+        app:fab_text_size="@dimen/text_size_action_button"
+        />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

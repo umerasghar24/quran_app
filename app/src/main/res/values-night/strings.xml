@@ -16,4 +16,6 @@
     <string name="verse">Verse</string>
     <string name="page_number">Page Number</string>
     <string name="title">ABCD</string>
+    <string name="feedback_email">teams@itglobe.pk</string>
+    <string name="email_subject">Tell us more!!</string>
 </resources>

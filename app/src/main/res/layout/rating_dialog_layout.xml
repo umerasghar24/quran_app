@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="20dp"
+    android:background="@drawable/round_corner_bg">
+    <ImageView
+        android:id="@+id/emoji_ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_rate_emoji_0" />
+
+    <TextView
+        android:id="@+id/text1ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="23dp"
+        android:gravity="center_horizontal"
+        android:paddingHorizontal="30dp"
+        android:minLines="2"
+        android:text="@string/RATE_US_MSG_0"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text2ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:paddingHorizontal="30dp"
+
+        android:text="@string/RATE_US_REQUEST"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+
+    android:layout_gravity="center">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="23dp"
+        android:gravity="center_horizontal"
+        android:text="@string/the_best_we_can_get"
+android:textColor="@color/green"
+        android:textSize="14sp"
+
+        android:drawablePadding="3dp"
+      />
+<!--    app:drawableEndCompat="@drawable/ic_rate_us_arrow"-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/ic_rate_us_arrow"
+        />
+
+</LinearLayout>
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:numStars="5"
+        android:stepSize="1"
+        android:id="@+id/ratingBar"
+        android:foregroundTint="@color/green"
+android:backgroundTint="@color/green"
+        android:layout_gravity="center"
+
+        android:layout_marginHorizontal="20dp"
+         />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/rateBtnID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/RATE"
+        android:textColor="@color/white"
+        android:background="@drawable/round_corner_bg"
+ android:backgroundTint="@color/green"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"/>
+
+</LinearLayout>
