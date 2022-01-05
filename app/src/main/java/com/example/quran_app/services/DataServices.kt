@@ -78,7 +78,7 @@ object DataServices {
         SurahNames(33,"Surah Al-Ahzab",200,376,"ic_33"),
         SurahNames(34,"Surah Saba’ ",7,385,"ic_34"),
         SurahNames(35,"Surah Al-Fatir ",286,391,"ic_35"),
-        SurahNames(36,"Surah Ya-Sin",200,397,"ic_36"),
+        SurahNames(36,"Surah Ya-Sin",200,396,"ic_36"),
         SurahNames(37,"Surah As-Saffah",7,401,"ic_37"),
         SurahNames(38,"Surah Sad ",286,408,"ic_38"),
         SurahNames(39,"Surah  Az-Zumar ",200,412,"ic_39"),

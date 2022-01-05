@@ -21,6 +21,7 @@
             app:navigationIconTint="@color/white"
             app:navigationIcon="@drawable/ic_drawer_menu"
             app:title="@string/quran_pak"
+
             app:titleMarginStart="10dp"
             app:titleTextColor="@color/white">
 
@@ -57,7 +58,9 @@
         app:fab_icon="@drawable/ic_reading"
         android:backgroundTint="@color/white"
         app:fab_duration="200"
-
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:fab_typeface="fonts/RobotoSlab-Regular.ttf"
 
         app:fab_expanded="true"/>

@@ -8,14 +8,13 @@
         android:icon="@drawable/ic_verticle"
         app:showAsAction="always"/>
     <item
-        android:iconTint="@color/white"
+
         android:id="@+id/color_mode"
         android:icon="@drawable/ic_dark_mode"
         android:title=""
         app:showAsAction="ifRoom" />
     <item
         android:title=""
-        android:iconTint="@color/black"
         android:id="@+id/bookmarks"
         android:icon="@drawable/ic_bookmarks"
         app:showAsAction="ifRoom"/>

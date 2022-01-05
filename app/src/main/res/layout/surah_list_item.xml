@@ -11,6 +11,9 @@
     android:paddingBottom="10dp"
     app:cardMaxElevation="10dp"
     app:cardPreventCornerOverlap="true"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackgroundBorderless"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout

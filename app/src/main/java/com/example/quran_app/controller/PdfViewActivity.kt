@@ -1,5 +1,8 @@
 package com.example.quran_app.controller
 
+import android.app.Dialog
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,12 +10,17 @@ import android.text.method.DigitsKeyListener
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.animation.Animation
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
 import com.example.quran_app.R
@@ -24,12 +32,15 @@ import com.example.quran_app.viewModel.ParahViewModel
 import com.github.barteksc.pdfviewer.PDFView
 import com.github.barteksc.pdfviewer.listener.OnPageScrollListener
 import com.github.barteksc.pdfviewer.util.FitPolicy
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import free.translate.languagetranslator.cameratranslation.voicetranslator.TinyDB
 import kotlinx.android.synthetic.main.activity_pdf_view.*
+import org.w3c.dom.Text
 import kotlin.properties.Delegates
 
 
 class PdfViewActivity : BaseActivity() {
+    private lateinit var  constraintLayout: ConstraintLayout
     private lateinit var mtoolBar: Toolbar
     lateinit var scrollChanger: TextView
     lateinit var onPageScrollListner: OnPageScrollListener
@@ -43,23 +54,32 @@ class PdfViewActivity : BaseActivity() {
     private var bookmarkpage by Delegates.notNull<Int>()
     var surah by Delegates.notNull<Int>()
     var parah by Delegates.notNull<Int>()
-    lateinit var editText: EditText
+//    lateinit var editText: EditText
+//    lateinit var mBookmarkText:TextView
     private var nightMode: Boolean = false
+    private var mBookmarkEditText:EditText?=null
     private var swipeVertical: Boolean = true
     private lateinit var mCostumTitle: TextView
+    private var isFullScreen=false
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pdf_view)
+        //for changingg status bar color for different activities
+        window.statusBarColor = ContextCompat.getColor(this, R.color.white)//use default color for status bar
+        //for hiding the bottom bar in this activity
+        constraintLayout=findViewById(R.id.constraint_parent_layout)
         scrollChanger = findViewById(R.id.horiz_vertical_scroll)
         bookmarkpage = intent.getIntExtra(getString(R.string.bookmark_key), -1)
+        //saving last page to display usinng  fab button
         fabPage = TinyDB.getInstance(this).getInt(getString(R.string.recent_page), 0)
         currentSurah =
             DataServices.getsurahFromPage(fabPage).surahNumber //for getting surah from page number
 //        toolbar1.title=DataServices.getparahFromPage(fabPage).title
-        mtoolBar = findViewById(R.id.toolbar1)
+        mtoolBar = findViewById(R.id.toolbar1)//casting  toolbar
         setSupportActionBar(mtoolBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        //back arrow pressed
         mtoolBar.setNavigationOnClickListener { view -> onBackPressed() }
         surah = intent.getIntExtra(getString(R.string.surah_key), -1)
         Log.e("PdfViewActivity", "you selected$surah")
@@ -81,20 +101,10 @@ class PdfViewActivity : BaseActivity() {
         }
 
         nex.setOnClickListener {
-/*
-var su=DataServices.surah[surah ++].page
-//            surah=surah ++
-            su=pdfView.currentPage
-            pdfView.jumpTo(su)
-*/
             if (surah >= 0) {
                 //load surrah
-                if (surah > 113) {
-                    Toast.makeText(this, "This is Last Surah", Toast.LENGTH_SHORT).show()
-                } else {
                     surah++
                     LoadSurah(surah)
-                }
 
             } else if (parah >= 0) {
 
@@ -127,7 +137,17 @@ var su=DataServices.surah[surah ++].page
                 LoadSurah(currentSurah)
             }
         }
-
+        pdfView.setOnClickListener {
+            if (isFullScreen){
+                isFullScreen=false
+                supportActionBar?.hide()
+                constraintLayout.visibility=View.GONE
+            }else{
+                isFullScreen=true
+                supportActionBar?.show()
+                constraintLayout.visibility=View.VISIBLE
+            }
+        }
 //         surah --
 //             val mPageG=DataServices.surah[surah].page
 //            pdfView.jumpTo(mPageG)
@@ -275,9 +295,12 @@ var su=DataServices.surah[surah ++].page
 //        show()
     }
 
+    //load doucument from assest folder
+
     private fun loadDocument(i: Int) {
 //  pdfView.fromAsset(ASSET_NAME).defaultPage(PAGES_COUNT-i)
 //        pdfView.loadPages()
+//        pdfView.startAnimation(pdfView.animation)
 
         val pagesArray = (PAGES_COUNT downTo 0).toList()
         Log.e(TAG, "loadDocument: $pagesArray")
@@ -298,27 +321,34 @@ var su=DataServices.surah[surah ++].page
             .pageFitPolicy(FitPolicy.WIDTH)
             .load()
     }
+    //calling method for menu item
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_viewer, menu)
         return super.onCreateOptionsMenu(menu)
     }
-
+//for casting of menu item
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Log.e("onOptionsItemSelected", "ïtem = ${item.itemId}")
-        if (item.itemId == R.id.bookmarks) {
+        if (item.itemId == R.id.bookmarks) {//when bookmarks is click we''ll inflate a custom layout for
+            //dialoge
+           showBookmarkDialoge(
+               this@PdfViewActivity
+           )
+          /*  mBookmarkText= TextView(this)
+            mBookmarkText.text= (PAGES_COUNT-pdfView.currentPage+1).toString()
             editText = EditText(this)
 //            editText.setHint("Enter title")
             editText.setText(DataServices.getsurahFromPage(PAGES_COUNT - pdfView.currentPage).title)
             val dialogBuilder = AlertDialog.Builder(this)
             dialogBuilder.setView(editText)
+//            dialogBuilder.setView(mBookmarkText)
             dialogBuilder.setMessage("Enter Title")
             dialogBuilder.setPositiveButton("Done") { _, _ ->
                 insertDataToDatabase()
 
             }
             dialogBuilder.setNegativeButton("Cancel") { _, _ -> }
-            dialogBuilder.show()
-
+            dialogBuilder.show()*/
 
         }
         if (item.itemId == R.id.color_mode) {
@@ -347,8 +377,36 @@ var su=DataServices.surah[surah ++].page
         return super.onOptionsItemSelected(item)
     }
 
+    private fun showBookmarkDialoge(ctx: Context) {//setting surah name ,page number in bookmark dialog
+        val bookmarkDialog=Dialog(ctx)
+        bookmarkDialog.setContentView(R.layout.bookmaks_dialogue)
+val resourceId=ctx.resources.getIdentifier(DataServices.getparahFromPage(PAGES_COUNT-pdfView.currentPage).image,
+    "drawable",ctx.packageName)
+        val resourcesId=ctx.resources.getIdentifier(DataServices.getsurahFromPage(PAGES_COUNT-pdfView.currentPage).image,
+            "drawable",ctx.packageName)
+        val mDialogImageSurah:ImageView?=bookmarkDialog.findViewById(R.id.surah_image_dialouge)
+        mDialogImageSurah?.setImageResource(resourcesId)
+val mDialogImage:ImageView?=bookmarkDialog.findViewById(R.id.parah_image_dialouge)
+        mDialogImage?.setImageResource(resourceId)
+        val mBookmarkPage=bookmarkDialog.findViewById<TextView>(R.id.page_number)
+        mBookmarkEditText= bookmarkDialog.findViewById(R.id.edit_text_surah_name)!!
+        val mDoneBtn=bookmarkDialog.findViewById<TextView>(R.id.save_text)
+        val mCancelBtn=bookmarkDialog.findViewById<TextView>(R.id.cancel_text)
+        mBookmarkPage?.text=(PAGES_COUNT-pdfView.currentPage+1).toString()
+        mBookmarkEditText?.setText(DataServices.getsurahFromPage(PAGES_COUNT - pdfView.currentPage).title)
+        mDoneBtn?.setOnClickListener {
+            insertDataToDatabase()
+            bookmarkDialog.hide()
+        }
+        mCancelBtn?.setOnClickListener {
+            bookmarkDialog.hide()
+        }
+        bookmarkDialog.show()
+    }
+
     private fun insertDataToDatabase() {
-        val getText = editText.text.toString()
+//        val getText = editText.text.toString()
+        val getText=mBookmarkEditText?.text.toString()
         val bookmark = BookmarksParah(
             id = 0,
             page = PAGES_COUNT-pdfView.currentPage + PAGE_DIFFERENCE,

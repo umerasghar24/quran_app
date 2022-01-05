@@ -10,7 +10,10 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="10dp"
     app:cardMaxElevation="10dp"
-    app:cardPreventCornerOverlap="true">
+    app:cardPreventCornerOverlap="true"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackgroundBorderless">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -88,7 +91,8 @@
             app:layout_constraintEnd_toStartOf="@+id/surrah_image"
             app:layout_constraintStart_toEndOf="@+id/bookmarks_name"
             app:layout_constraintTop_toTopOf="@+id/surrah_image"
-            app:srcCompat="@drawable/ic_bookmark" />
+            app:srcCompat="@drawable/ic_bookmarks"
+            app:tint="@color/maroon" />
 
         <TextView
             android:id="@+id/bookmark_title"
