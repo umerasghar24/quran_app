@@ -2,26 +2,22 @@ package com.example.quran_app.controller
 
 import android.app.Dialog
 import android.content.Context
-import android.os.Build
+import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.text.method.DigitsKeyListener
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.view.animation.Animation
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
 import com.example.quran_app.R
 import com.example.quran_app.models.BookmarksParah
@@ -32,11 +28,13 @@ import com.example.quran_app.viewModel.ParahViewModel
 import com.github.barteksc.pdfviewer.PDFView
 import com.github.barteksc.pdfviewer.listener.OnPageScrollListener
 import com.github.barteksc.pdfviewer.util.FitPolicy
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import free.translate.languagetranslator.cameratranslation.voicetranslator.TinyDB
 import kotlinx.android.synthetic.main.activity_pdf_view.*
-import org.w3c.dom.Text
 import kotlin.properties.Delegates
+import android.app.Activity
+import android.R.string.no
+import android.view.*
+import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
 
 
 class PdfViewActivity : BaseActivity() {
@@ -50,6 +48,7 @@ class PdfViewActivity : BaseActivity() {
     lateinit var pdfView: PDFView
     lateinit var nex: ImageView
     lateinit var previ: ImageView
+    lateinit var mHorizVerticleSplit:ImageView
     private lateinit var mUserViewModel: ParahViewModel
     private var bookmarkpage by Delegates.notNull<Int>()
     var surah by Delegates.notNull<Int>()
@@ -65,6 +64,8 @@ class PdfViewActivity : BaseActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pdf_view)
+        //casting verticle Horizontol Split ImageView
+        mHorizVerticleSplit=findViewById(R.id.horizontol_verticle_split)
         //for changingg status bar color for different activities
         window.statusBarColor = ContextCompat.getColor(this, R.color.white)//use default color for status bar
         //for hiding the bottom bar in this activity
@@ -89,12 +90,13 @@ class PdfViewActivity : BaseActivity() {
         nex = findViewById(R.id.next)
         previ = findViewById(R.id.previous)
         Log.e(TAG, "onCreate: $fabPage $surah $parah ")
+        //casting textview in toolbar
+        mCostumTitle=mtoolBar.findViewById(R.id.custom_title)
 
         onPageScrollListner = OnPageScrollListener { page, positionOffset ->
             Log.e(TAG, "Page on scroll: $page  $positionOffset")
-            mCostumTitle=mtoolBar.findViewById(R.id.custom_title)
+            mCostumTitle.text = DataServices.getsurahFromPage(PAGES_COUNT-page).title
 
-                mCostumTitle.text = DataServices.getsurahFromPage(PAGES_COUNT-page).title
 
 //to show text in toolbar title
 //            getSupportActionBar()?.title = DataServices.getsurahFromPage(PAGES_COUNT - page).title
@@ -103,6 +105,7 @@ class PdfViewActivity : BaseActivity() {
         nex.setOnClickListener {
             if (surah >= 0) {
                 //load surrah
+                if(surah!=113)
                     surah++
                     LoadSurah(surah)
 
@@ -111,9 +114,11 @@ class PdfViewActivity : BaseActivity() {
                 //load parah
 //                val mPageGo=DataServices.surah[surah].page
 //                pdfView.jumpTo(mPageGo)
+                if(parah!=29)
                 parah++
                 LoadParah(parah)
             } else { //if comming from fab page
+                if(currentSurah!=113)
                 currentSurah++
                 LoadSurah(currentSurah)
             }
@@ -124,15 +129,21 @@ class PdfViewActivity : BaseActivity() {
         previ.setOnClickListener {
             if (surah >= 0) {
                 //load surrah
-                surah--
+                if(surah!=0)
+                    surah--
+
                 LoadSurah(surah)
+
+
             } else if (parah >= 0) {
                 //load parah
 //                val mPageGo=DataServices.surah[surah].page
 //                pdfView.jumpTo(mPageGo)
-                parah--
+    if(parah!=0)parah--
                 LoadParah(parah)
-            } else { //if comming from fab page
+            } else {
+                //if comming from fab page
+                if(currentSurah!=0)
                 currentSurah--
                 LoadSurah(currentSurah)
             }
@@ -153,7 +164,7 @@ class PdfViewActivity : BaseActivity() {
 //            pdfView.jumpTo(mPageG)
 ////            pdfView.jumpTo(DataServices.surah[surah --].page)
 
-        imageView3.setOnClickListener {
+        mHorizVerticleSplit.setOnClickListener {
 
 //            val pagehold=DataServices.parahs[parah].page
             if (pdfView.isSwipeVertical) {
@@ -171,7 +182,9 @@ class PdfViewActivity : BaseActivity() {
                     .scrollHandle(QuranScrollHandle(this))
                     .spacing(10).pageFitPolicy(FitPolicy.WIDTH).load()*/
 //                pdfView.isSwipeEnabled=swipeVertical
-                scrollChanger.setText(getString(R.string.vertical))
+                scrollChanger.text = getString(R.string.vertical)
+                mHorizVerticleSplit.setImageResource(R.drawable.ic_verticle_split)
+
             } else {
                 swipeVertical = false
                 loadDocument(PAGES_COUNT-pdfView.currentPage)
@@ -187,7 +200,8 @@ class PdfViewActivity : BaseActivity() {
                     .spacing(10).pageFitPolicy(FitPolicy.WIDTH)
                     .load()*/
 //                pdfView.isSwipeEnabled=swipeVertical
-                scrollChanger.setText(getString(R.string.horizontol))
+                scrollChanger.text = getString(R.string.horizontol)
+             mHorizVerticleSplit.setImageResource(R.drawable.ic_horizontol_split)
 
             }
 //pdfView.loadPages()
@@ -211,6 +225,7 @@ class PdfViewActivity : BaseActivity() {
 
         goTo.setOnClickListener {
             gotoPage(bookmarkpage)
+//            openSoftKeyboard()
         }
     }
 
@@ -218,8 +233,15 @@ class PdfViewActivity : BaseActivity() {
         val editText = EditText(this)
         editText.setHint("Enter Page Number")
         editText.keyListener = DigitsKeyListener.getInstance("0123456789")
+//        editText.inputType=
+
+
         val dialougeBuilder = AlertDialog.Builder(this)
         dialougeBuilder.setMessage("Go To Page")
+        DialogInterface.OnShowListener {   editText.requestFocus()
+            val inputManager =applicationContext.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.restartInput(editText) }
+
         dialougeBuilder.setView(editText)
         dialougeBuilder.setPositiveButton("Done") { _, _ ->
             //by getting text value and jump to that page
@@ -240,8 +262,15 @@ class PdfViewActivity : BaseActivity() {
                 Toast.makeText(this, "Please Enter a valid page number", Toast.LENGTH_LONG).show()
             }
         }
-        dialougeBuilder.setNegativeButton("Cancel") { _, _ -> }
-        dialougeBuilder.show()
+        dialougeBuilder.setNegativeButton("Cancel") { _, _ ->
+//            hideKeyboard(this)
+        }
+//        dialougeBuilder.show()
+
+//        dialougeBuilder = builder.create();
+//        dialougeBuilder.create()
+//        dialougeBuilder.getWindow()?.setSoftInputMode(ViewGroup.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialougeBuilder.show();
         val editor = object : TextWatcher {
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -269,29 +298,37 @@ class PdfViewActivity : BaseActivity() {
             }
 
         }
-
         editText.addTextChangedListener(editor)
-
-
     }
-
     private fun LoadPage(page: Int) {
         loadDocument(page - 1)
 //        show()
     }
 
     private fun LoadParah(i: Int) {
-        if (i < 0 || i > 30)
-            return
+        if (i < 0 || i > 29){
+//            return
+            Toast.makeText(this, "No Juzz Found", Toast.LENGTH_SHORT).show()
 
-        loadDocument(DataServices.parahs[i].page)
 //        show()
+        }else{
+            loadDocument(DataServices.parahs[i].page)
+            return
+        }
+
     }
 
     private fun LoadSurah(i: Int) {
-        if (i < 0 || i > 114)
+        if (i < 0 || i > 113){
+//            return
+            Toast.makeText(this, "No Surah Found", Toast.LENGTH_SHORT).show()
+
+        }else{
+            loadDocument(DataServices.surah[i].page)
             return
-        loadDocument(DataServices.surah[i].page)
+        }
+//
+
 //        show()
     }
 
@@ -309,15 +346,16 @@ class PdfViewActivity : BaseActivity() {
             .enableSwipe(true)
             .pages(*pagesArray.toIntArray())
             .defaultPage(PAGES_COUNT - i)
-            .pageSnap(true)
-            .pageFling(true)
+            /*.pageSnap(true)
+            .pageFling(true)*/
             .nightMode(nightMode)
+            .fitEachPage(true)
             .onPageScroll(onPageScrollListner)
             .swipeHorizontal(swipeVertical)
             .pageFitPolicy(FitPolicy.HEIGHT)
             .spacing(10)
             .enableAnnotationRendering(true)
-            .scrollHandle(QuranScrollHandle(this, true))
+            .scrollHandle(QuranScrollHandle(this, false))
             .pageFitPolicy(FitPolicy.WIDTH)
             .load()
     }
@@ -382,10 +420,8 @@ class PdfViewActivity : BaseActivity() {
         bookmarkDialog.setContentView(R.layout.bookmaks_dialogue)
 val resourceId=ctx.resources.getIdentifier(DataServices.getparahFromPage(PAGES_COUNT-pdfView.currentPage).image,
     "drawable",ctx.packageName)
-        val resourcesId=ctx.resources.getIdentifier(DataServices.getsurahFromPage(PAGES_COUNT-pdfView.currentPage).image,
-            "drawable",ctx.packageName)
-        val mDialogImageSurah:ImageView?=bookmarkDialog.findViewById(R.id.surah_image_dialouge)
-        mDialogImageSurah?.setImageResource(resourcesId)
+        val mBookmarkTitle:TextView?=bookmarkDialog.findViewById(R.id.enter_title_text)
+        mBookmarkTitle?.text = DataServices.getparahFromPage(PAGES_COUNT-pdfView.currentPage).title
 val mDialogImage:ImageView?=bookmarkDialog.findViewById(R.id.parah_image_dialouge)
         mDialogImage?.setImageResource(resourceId)
         val mBookmarkPage=bookmarkDialog.findViewById<TextView>(R.id.page_number)

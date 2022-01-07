@@ -134,7 +134,7 @@
                 android:id="@+id/lin_lay3">
                 <ImageView
                     android:layout_marginTop="5dp"
-                    android:id="@+id/imageView3"
+                    android:id="@+id/horizontol_verticle_split"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 

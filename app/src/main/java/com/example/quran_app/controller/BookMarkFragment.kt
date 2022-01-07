@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_book_mark.view.*
 
 class BookMarkFragment : Fragment(R.layout.fragment_book_mark) {
 val mViewModel:SearchViewModel by activityViewModels()
+    var adapter:BookmarksAdapter?=null
     private lateinit var mUserViewModel: ParahViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,7 @@ val mViewModel:SearchViewModel by activityViewModels()
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_book_mark, container, true)
 //        val adapter = context?.let { BookmarksAdapter(this, it) }
-        val adapter = context?.let { BookmarksAdapter(this,ViewModelProvider(this), it) }
+        adapter = context?.let { BookmarksAdapter(this,ViewModelProvider(this), it) }
 
         val recyclerView = view.recyclerview
         recyclerView.adapter = adapter
@@ -41,13 +42,14 @@ val mViewModel:SearchViewModel by activityViewModels()
         mUserViewModel = ViewModelProvider(this).get(ParahViewModel::class.java)
         mUserViewModel.readAllData.observe(viewLifecycleOwner, Observer { parahBookMark ->
             if (adapter != null) {
-                adapter.setData(parahBookMark)
+                adapter!!.setData(parahBookMark)
 //                adapter.filter.filter(parahBookMark.toString())
             }
         })
         mViewModel.searchQuery.observe(viewLifecycleOwner,{q->
             adapter?.filter?.filter(q)
         })
+//        mViewModel.searchQuery.value=""
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 

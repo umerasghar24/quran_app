@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.quran_app.adapter.ViewPagerAdapter
+import com.example.quran_app.controller.BaseActivity
 import com.example.quran_app.controller.PdfViewActivity
 import com.example.quran_app.controller.UserActivity
 import com.example.quran_app.viewModel.SearchViewModel
@@ -20,8 +21,7 @@ import free.translate.languagetranslator.cameratranslation.voicetranslator.TinyD
 //lateinit var adapter1: ParahRecyclerAdapter
 //lateinit var countryrv: RecyclerView
 //lateinit var suparahFragment:SuparahFragment
-open class MainActivity : AppCompatActivity() {
-
+open class MainActivity : BaseActivity() {
     private lateinit var fab: FloatingActionButtonExpandable
     lateinit var tinyDB:TinyDB
     val mViewModel: SearchViewModel by viewModels()
@@ -85,7 +85,6 @@ toolbar.setNavigationOnClickListener {
         val search: MenuItem? = menu?.findItem(R.id.search_home)
         val searchView: SearchView? = search?.actionView as? SearchView
         searchView?.queryHint = "Search"
-
 
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

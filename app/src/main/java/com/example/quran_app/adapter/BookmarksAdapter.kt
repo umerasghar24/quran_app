@@ -26,20 +26,27 @@ import kotlinx.android.synthetic.main.bookmark_list.view.*
 
 private lateinit var mparahViewModel: ParahViewModel
 
-class BookmarksAdapter(bookMarkFragment: BookMarkFragment) :RecyclerView.Adapter<BookmarksAdapter.Holder>(),Filterable
+class BookmarksAdapter(bookMarkFragment: BookMarkFragment  ) :
+    RecyclerView.Adapter<BookmarksAdapter.Holder>(), Filterable {
+//    var bFilterList: List<BookmarksParah?> = listOf()
+var bFilterList: List<BookmarksParah?> = emptyList()
 
- {
-     var bFilterList: List<BookmarksParah?> = emptyList()
-    constructor(bookMarkFragment: BookMarkFragment, vmp: ViewModelProvider,context:Context) : this(bookMarkFragment) {
-       vm =vmp
-        this.context=context
+    constructor(
+        bookMarkFragment: BookMarkFragment,
+        vmp: ViewModelProvider,
+        context: Context
+    ) : this(bookMarkFragment) {
+        vm = vmp
+        this.context = context
     }
-    private lateinit var vm:ViewModelProvider
-     private lateinit var context: Context
-    private var parahList = emptyList<BookmarksParah>()
-init {
-    bFilterList=parahList
-}
+
+    private lateinit var vm: ViewModelProvider
+    private lateinit var context: Context
+//    private var parahList = listOf<BookmarksParah>(BookmarksParah(0,1,""))
+private var parahList = emptyList<BookmarksParah>()
+    init {
+        bFilterList = parahList
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -49,7 +56,9 @@ init {
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val currentItem = parahList[position].let { holder.bindParahs(it,context) }
+//        val currentItem = parahList[position].let { holder.bindParahs(it, context) }
+        bFilterList[position].let { holder.bindParahs(it!!,context) }
+
 //        holder.itemView.parah_num.text = currentItem.id.toString()
 
 //holder.bindparah(parahList[position],context)
@@ -57,37 +66,45 @@ init {
 
 
     override fun getItemCount(): Int {
-        return parahList.size
+//        return parahList.size
+//    bFilterList=parahList
+//        return bFilterList.count()?:0
+        return bFilterList.size
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val parahPict: ImageView = itemView.findViewById(R.id.surrah_image)
         fun bindParahs(currentItem: BookmarksParah, context: Context) {
+
+            mparahViewModel = vm.get(ParahViewModel::class.java)
+//            parahList= listOf(mparahViewModel.readAllData)
             itemView.page_bookmarks.text = currentItem.page.toString()
-            if (currentItem.title.isBlank()){
+            if (currentItem.title.isBlank()) {
 //                itemView.bookmarks_name.text=DataServices.getparahFromPage(currentItem.page).title
 //                itemView.bookmarks_name.text=DataServices.getsurahFromPage(currentItem.page).title
-                itemView.bookmarks_name.text=DataServices.getparahFromPage(currentItem.page).title
-            }else{
+                itemView.bookmarks_name.text = DataServices.getparahFromPage(currentItem.page).title
+            } else {
 //                itemView.bookmark_title.text=currentItem.image
-                itemView.bookmarks_name.text=currentItem.title
+                itemView.bookmarks_name.text = currentItem.title
             }
 
 
-        val resourceId = context.resources.getIdentifier(
+            val resourceId = context.resources.getIdentifier(
 //            "ic_1"
-            DataServices.getparahFromPage(currentItem.page).image, "drawable", context.packageName
-        )
-        itemView.surrah_image.setImageResource(resourceId)
+                DataServices.getparahFromPage(currentItem.page).image,
+                "drawable",
+                context.packageName
+            )
+            itemView.surrah_image.setImageResource(resourceId)
 //        (holder.itemView.surrah_image as ImageView).setImageResource(resourceId)
 
-            Log.e(TAG, "onBindViewHolder: " )
+            Log.e(TAG, "onBindViewHolder: ")
             itemView.delete_icon.setOnClickListener {
-                Log.e(TAG, "onBindViewHolder: delete" )
+                Log.e(TAG, "onBindViewHolder: delete")
                 deleteSurah(currentItem)
             }
             itemView.setOnClickListener {
-                val intent:Intent=Intent(context,PdfViewActivity::class.java)
+                val intent: Intent = Intent(context, PdfViewActivity::class.java)
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 intent.putExtra(context.getString(R.string.bookmark_key), currentItem.page)
                 context.startActivity(intent)
@@ -99,18 +116,23 @@ init {
     @SuppressLint("NotifyDataSetChanged")
     fun setData(user: List<BookmarksParah>) {
         this.parahList = user
+        this.bFilterList=user
         notifyDataSetChanged()
     }
 
     private fun deleteSurah(a: BookmarksParah) {
-        mparahViewModel = vm.get(ParahViewModel::class.java)
+
 //        mparahViewModel.deleteSurah(a.id)
-        val dialogueBuilder=AlertDialog.Builder(context)
-        dialogueBuilder.setPositiveButton("Yes"){_,_->
+        val dialogueBuilder = AlertDialog.Builder(context)
+        dialogueBuilder.setPositiveButton("Yes") { _, _ ->
             mparahViewModel.deleteSurah(a.id)
-            Toast.makeText(context, "You have successfully deleted this bookmark", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context,
+                "You have successfully deleted this bookmark",
+                Toast.LENGTH_SHORT
+            ).show()
         }
-        dialogueBuilder.setNegativeButton("No"){_,_->
+        dialogueBuilder.setNegativeButton("No") { _, _ ->
 
         }
         dialogueBuilder.setTitle("Delete?")
@@ -119,39 +141,42 @@ init {
         dialogueBuilder.create().show()
 
 
+    }
 
+    override fun getFilter(): Filter {
+        bFilterList = parahList
+        return costumFilter
+    }
+
+    val costumFilter = object : Filter() {
+
+        override fun performFiltering(constraint: CharSequence?): FilterResults {
+            val charSearch = constraint.toString()
+
+            if (charSearch.isEmpty()) {
+                bFilterList = parahList
+                Log.e(TAG, "performFiltering: the value +$bFilterList and++ $parahList", )
+            } else {
+                val resultList = mutableListOf<BookmarksParah>()
+                for (row in parahList) {
+                    if (row.title.lowercase().contains(charSearch.lowercase())) {
+                        resultList.add(row)
+                    }
+                }
+                bFilterList = resultList
+            }
+            val filterList = FilterResults()
+            filterList.values = bFilterList
+            return filterList
+        }
+
+        @Suppress("UNCHECKED_CAST")
+        override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+            bFilterList = (results?.values as? List<BookmarksParah?>)!!
+            notifyDataSetChanged()
+        }
 
     }
 
-     override fun getFilter(): Filter {
-return costumFilter
-     }
-     val costumFilter=object:Filter(){
-         override fun performFiltering(constraint: CharSequence?): FilterResults {
-             val charSearch=constraint.toString()
-             if (charSearch.isEmpty()){
-                 bFilterList=parahList
-             }else{
-                 val resultList= mutableListOf<BookmarksParah>()
-                 for (row in parahList){
-                     if (row.id.toString().lowercase().contains(charSearch.lowercase())){
-                         resultList.add(row)
-                     }
-                 }
-                 bFilterList=resultList
-             }
-             val filterList=FilterResults()
-             filterList.values=bFilterList
-             return filterList
-         }
 
-         @Suppress("UNCHECKED_CAST")
-         override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-bFilterList= (results?.values as? List<BookmarksParah?>)!!
-             notifyDataSetChanged()
-         }
-
-     }
-
-
- }
+}

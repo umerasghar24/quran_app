@@ -62,6 +62,8 @@ private val suratName:TextView=itemView.findViewById(R.id.surah_name)
                 for (row in surahName){
                     if (row.title.lowercase().contains(charSearch.lowercase())){
                         resultList.add(row)
+                    }else if (row.surahNumber.toString().contains(charSearch)){
+                        resultList.add(row)
                     }
                 }
                 surahFilterList=resultList

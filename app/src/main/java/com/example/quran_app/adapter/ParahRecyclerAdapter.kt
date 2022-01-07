@@ -77,6 +77,8 @@ class ParahRecyclerAdapter(
                     if (row.title.lowercase().contains(charSearch.lowercase())
                     ) {
                         resultList.add(row)
+                    }else if (row.parahNumber.toString().contains(charSearch)){
+                        resultList.add(row)
                     }
                 }
                 countryFilterList = resultList

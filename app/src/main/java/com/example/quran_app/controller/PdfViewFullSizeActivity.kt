@@ -192,7 +192,7 @@ class PdfViewFullSizeActivity : AppCompatActivity() {
 //            pdfView.jumpTo(mPageG)
 ////            pdfView.jumpTo(DataServices.surah[surah --].page)
 
-        imageView3.setOnClickListener {
+        horizontol_verticle_split.setOnClickListener {
 
 //            val pagehold=DataServices.parahs[parah].page
             if (pdfView.isSwipeVertical == true) {
